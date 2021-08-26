@@ -1,15 +1,15 @@
 package com.company;
 
 public enum Position {
+    HR,
+    Lawyer,
     Director,
-    DeputyDirector,
+    Operator,
     Secretary,
+    Developer,
     Accountant,
+    DeputyDirector,
     ProjectManager,
     ProductManager,
-    Developer,
-    HR,
-    Operator,
-    Lawyer,
     ITSalesManagement,
 }

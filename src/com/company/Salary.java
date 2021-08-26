@@ -1,19 +1,17 @@
 package com.company;
-
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Salary {
-    public static float maxSalary(ArrayList<Employee> employee) {
-        float maxSelry = 0;
-        for (Employee i : employee) {
-            if (i.getSalary() > maxSelry) {
-                maxSelry = i.getSalary();
-            }
-        }
-        return maxSelry;
+    public static float maxSalary(List<Employee> employee) {
+      return Collections
+                .max(employee.stream().map(Employee::getSalary).collect(Collectors.toList()));
     }
 
-    public static void maxSalaryEmployee(ArrayList<Employee> employee) {
+    public static void maxSalaryEmployee(List<Employee> employee) {
         float maxSelry = maxSalary(employee);
         for (Employee i : employee) {
             if (i.getSalary() == maxSelry) {
@@ -23,13 +21,8 @@ public class Salary {
     }
 
     public static float minSalary(ArrayList<Employee> employee) {
-        float minSelry = employee.get(0).getSalary();
-        for (Employee i : employee) {
-            if (i.getSalary() < minSelry) {
-                minSelry = i.getSalary();
-            }
-        }
-        return minSelry;
+        return Collections
+                .min(employee.stream().map(Employee::getSalary).collect(Collectors.toList()));
     }
 
     public static void minSalaryEmployee(ArrayList<Employee> employee) {
@@ -79,16 +72,19 @@ public class Salary {
     }
 
     public static float incomeTaxSalary(ArrayList<Employee> employee, int percent) {
-        float incomeTax = 0;
-        for (Employee i : employee)
-            incomeTax = incomeTax + ((i.getSalary() * percent) / 100);
-        return incomeTax;
+       Stream<Float>  sum = Salary.getEmployeesSalary(employee).stream().map(i -> i+(i * percent) / 100);
+        return  sum.reduce((float) 0, (a, b) -> a + b);
+
     }
 
-    public static float profit(ArrayList<Employee> employee, float income) {
-        for (Employee i : employee)
-            income = income - i.getSalary();
+    public static float profit(List<Employee> employee, float income) {
+        income  = income-Salary.getEmployeesSalary(employee).stream().reduce((float) 0, (a, b) -> a + b);
         return income;
+    }
+
+    public static List<Float> getEmployeesSalary(List<Employee> employees){
+        List<Float> salary =  employees.stream().map(t->t.getSalary()).collect(Collectors.toList());
+        return salary;
     }
 
 }

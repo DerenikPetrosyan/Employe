@@ -1,8 +1,10 @@
 package com.company;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class TestEmploye {
+public class Main {
+
     public static void main(String[] args) {
         ArrayList<Employee> employeinfo = new ArrayList<>();
 
@@ -60,7 +62,7 @@ public class TestEmploye {
                 .build();
 
         People p5 = new People.Builder("Tatev")
-                .surname("Galstyan")
+                .surname("Petrosyan")
                 .dateOfBirth("11-01-2001")
                 .profession("Designer")
                 .addres(new Addres.Builder("Armenia") .district("Shiraki")
@@ -128,14 +130,11 @@ public class TestEmploye {
         employeinfo.add(e5);
         employeinfo.add(e6);
 
-//        SortEmployee.sortSalary(employeinfo);
-//        for (Employee i : employeinfo) {
-//            System.out.println(i);
-//        }
-//        Employee.getEmployeeByNameSurname(employeinfo, "Gor", "Hovsepyan");
-//        System.out.println(e6.getPeople().getAge());
-//        System.out.println(Salary.getEmployeesSalary(employeinfo));
-        Employee.getEmployeeBySurname(employeinfo,"Galstyan");
-    }
+        long start = System.currentTimeMillis();
+        Salary.maxSalary(employeinfo);
 
+        long finishTime  = System.currentTimeMillis() - start;
+        System.out.println(finishTime);
+
+    }
 }

@@ -1,26 +1,16 @@
 package com.company;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class Employee {
+
+    private float salary;
     private People people;
     private Position position;
-    private float salary;
     private String bankCardNumber;
 
-//    public Employee(People people, Position position, float salaryAMD, String bankCardNumber) {
-//        try {
-//            if (bankCardNumber.length() == 16) {
-//                this.bankCardNumber = bankCardNumber;
-//            }
-//        } catch (RuntimeException exception) {
-//            System.out.println("Enter the sixteen digits in front of your bank card");
-//        }
-//        this.people = people;
-//        this.position = position;
-//        this.salary = salaryAMD;
-//    }
     public static class Builder {
-
         private People people;
         private Position position;
         private float salary;
@@ -29,14 +19,13 @@ public class Employee {
         public Builder(People people) {
             this.people = people;
         }
-
         public Employee.Builder position(Position position) {
             this.position = position;
             return this;
         }
 
         public Employee.Builder salaryAMD(float salary) {
-            this.salary=salary;
+            this.salary = salary;
             return this;
         }
 
@@ -98,32 +87,6 @@ public class Employee {
         this.salary = salary;
     }
 
-    public Employee getEmployeeByPhone(ArrayList<Employee> employees, String phoneNumber) {
-        for (Employee i : employees) {
-            if (i.getPeople().getPhoneNumber().equals(phoneNumber)) {
-                return i;
-            }
-        }
-        return null;
-    }
-
-    public Employee getEmployeeByBankCard(ArrayList<Employee> employees, String bankCardNumber) {
-        for (Employee i : employees) {
-            if (i.getBankCardNumber().equals(bankCardNumber)) {
-                return i;
-            }
-        }
-        return null;
-    }
-
-    public static String getEmployeeBySalary(ArrayList<Employee> employee, float salary) {
-        for (Employee i : employee) {
-            if (i.getSalary() == salary) {
-                System.out.println(i);
-            }
-        }
-        return "";
-    }
 
     public Position getPosition() {
         return position;
@@ -133,60 +96,55 @@ public class Employee {
         this.position = position;
     }
 
-    public static void getEmployeeByAge(ArrayList<Employee> employee, int age) {
-        for (Employee i : employee) {
-            if (i.getPeople().getAge() == age) {
-                System.out.println(i);
-            }
-        }
 
+    public void  getEmployeeByPhone(ArrayList<Employee> employees, String phoneNumber) {
+        employees.stream().filter(t->t.getPeople().getPhoneNumber().equals(phoneNumber))
+                .forEach(System.out::println);
+    }
+
+    public void getEmployeeByBankCard(ArrayList<Employee> employees, String bankCardNumber) {
+        employees.stream().filter(t->t.getBankCardNumber().equals(bankCardNumber))
+                .forEach(System.out::println);
+    }
+
+    public static void getEmployeeBySalary(ArrayList<Employee> employee, float salary) {
+        employee.stream().filter(t->t.getSalary()==(salary))
+                .forEach(System.out::println);
+    }
+
+
+    public static void getEmployeeByAge(ArrayList<Employee> employee, int age) {
+        employee.stream().filter(t->t.getPeople().getAge()==(age))
+                .forEach(System.out::println);
     }
 
     public static void getEmployeeByPosition(ArrayList<Employee> employee, Position position) {
-        for (Employee i : employee) {
-            if (i.getPosition().equals(position)) {
-                System.out.println(i);
-            }
-        }
-
+        employee.stream().filter(t->t.getPosition().equals(position))
+                .forEach(System.out::println);
     }
 
     public static void getEmployeeByPeople(ArrayList<Employee> employee, People people) {
-        for (Employee i : employee) {
-            if (i.getPeople().equals(people)) {
-                System.out.println(i);
-            }
-        }
-
+            employee.stream().filter(t->t.getPeople().equals(people))
+                    .forEach(System.out::println);
     }
 
     public static void getEmployeeByName(ArrayList<Employee> employee, String name) {
-        for (Employee i : employee) {
-            if (i.getPeople().getName().equals(name)) {
-                System.out.println(i);
-            }
-        }
-
+        employee.stream().filter(t->t.getPeople().getName().equals(name))
+                .forEach(System.out::println);
     }
 
     public static void getEmployeeBySurname(ArrayList<Employee> employee, String surname) {
-        for (Employee i : employee) {
-            if (i.getPeople().getSurname().equals(surname)) {
-                System.out.println(i);
-            }
+        employee.stream().filter(t->t.getPeople().getSurname().equals(surname))
+                .forEach(System.out::println);
+
         }
-
-    }
-
     public static void getEmployeeByNameSurname(ArrayList<Employee> employee, String name, String surname) {
         for (Employee i : employee) {
             if (i.getPeople().getName().equals(name) && i.getPeople().getSurname().equals(surname)) {
                 System.out.println(i);
             }
         }
-
     }
-
 
     @Override
     public String toString() {

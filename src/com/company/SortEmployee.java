@@ -1,5 +1,9 @@
 package com.company;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
+
 public class SortEmployee {
 
     public static ArrayList<Employee> sortSalary(ArrayList<Employee> employee) {
@@ -59,6 +63,37 @@ public class SortEmployee {
             }
         }
         return employee;
+    }
+
+    public static ArrayList<Employee> sortEmployeesByCountry(ArrayList<Employee> employees,String country){
+        ArrayList<Employee> employeesByCountry=new ArrayList<>();
+        for (Employee i:employees){
+            if(Objects.equals(i.getPeople().getAddres().getCountry(), country)){
+                employeesByCountry.add(i);
+            }
+        }
+        return employeesByCountry;
+
+
+    }
+    public static ArrayList<Employee> sortEmployeesByDistrict(ArrayList<Employee> employees,String district){
+        ArrayList<Employee> employeesByDistrict=new ArrayList<>();
+        for (Employee i:employees){
+            if(i.getPeople().getAddres().getDistrict().equals(district)){
+                employeesByDistrict.add(i);
+            }
+        }
+        return employeesByDistrict;
+    }
+
+    public static ArrayList<Employee> sortEmployeesByCityOrVillage(ArrayList<Employee> employees,String cityOrVillage){
+        ArrayList<Employee> employeesByCityOrVillage=new ArrayList<>();
+        for (Employee i:employees){
+            if(i.getPeople().getAddres().getCityOrVillage().equals(cityOrVillage)){
+                employeesByCityOrVillage.add(i);
+            }
+        }
+        return employeesByCityOrVillage;
     }
 
 }
